@@ -25,7 +25,6 @@ classifiers = [
   "Programming Language :: Python :: 3.12",
 ]
 dependencies = [
-  "tomli; python_version<'3.11'",
   "typing-extensions; python_version<'3.8'",
 ]
 

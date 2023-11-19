@@ -9,9 +9,11 @@ import sys
 from contextlib import suppress
 from typing import Any, NoReturn, TextIO
 
-from fancy_pypi_readme._builder import build_text
-from fancy_pypi_readme._config import load_and_validate_config
-from fancy_pypi_readme.exceptions import ConfigurationError
+from fancy_pypi_readme import (
+    ConfigurationError,
+    build_text,
+    load_and_validate_config,
+)
 
 
 def cli_run(

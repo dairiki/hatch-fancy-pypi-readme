@@ -9,8 +9,8 @@ from pathlib import Path
 
 import pytest
 
-from hatch_fancy_pypi_readme.__main__ import _maybe_load_hatch_toml, tomllib
-from hatch_fancy_pypi_readme._cli import Backend, cli_run
+from pdm_fancy_pypi_readme.__main__ import _maybe_load_hatch_toml, tomllib
+from pdm_fancy_pypi_readme._cli import Backend, cli_run
 
 from .utils import run
 
@@ -52,27 +52,24 @@ def _empty_pyproject(backend):
 
 class TestCLIEndToEnd:
     @pytest.mark.usefixtures("new_project")
-    def test_missing_config(self, build_system):
+    def test_missing_config(self):
         """
         Missing configuration is caught and gives helpful advice.
 
         Run it as it would be run by the user.
         """
-        out = run("hatch_fancy_pypi_readme", check=False)
+        out = run("pdm_fancy_pypi_readme", check=False)
 
-        config_source = f"`[{build_system.config_prefix}.fancy-pypi-readme]` in pyproject.toml"
-        if build_system.backend == "hatchling.build":
-            config_source += (
-                " or `[metadata.hooks.fancy-pypi-readme]` in hatch.toml"
-            )
-
+        config_source = (
+            "`[tool.pdm.build.hooks.fancy-pypi-readme]` in pyproject.toml"
+        )
         assert f"Missing configuration ({config_source})\n" == out
 
     def test_ok(self, pyproject_toml_path):
         """
         A valid config is rendered.
         """
-        out = run("hatch_fancy_pypi_readme", pyproject_toml_path)
+        out = run("pdm_fancy_pypi_readme", pyproject_toml_path)
 
         assert out.startswith("# Level 1 Header")
         assert "1.0.0" not in out
@@ -94,7 +91,7 @@ class TestCLIEndToEnd:
         out = tmp_path / "out.txt"
 
         assert "" == run(
-            "hatch_fancy_pypi_readme",
+            "pdm_fancy_pypi_readme",
             pyproject_toml_path,
             "-o",
             str(out),
@@ -110,7 +107,7 @@ class TestCLIEndToEnd:
         hatch_toml.write_text("")
 
         assert run(
-            "hatch_fancy_pypi_readme",
+            "pdm_fancy_pypi_readme",
             pyproject_toml_path,
             f"--hatch-toml={hatch_toml.resolve()}",
         ).startswith("# Level 1 Header")
@@ -145,7 +142,7 @@ text = '# Level 1 Header'
 
         monkeypatch.chdir(tmp_path)
 
-        assert run("hatch_fancy_pypi_readme").startswith("# Level 1 Header")
+        assert run("pdm_fancy_pypi_readme").startswith("# Level 1 Header")
 
 
 class TestCLI:

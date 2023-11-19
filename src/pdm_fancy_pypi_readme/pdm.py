@@ -6,8 +6,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
 
-from ._builder import build_text
-from ._config import load_and_validate_config
+from fancy_pypi_readme import build_text, load_and_validate_config
 
 
 if TYPE_CHECKING:

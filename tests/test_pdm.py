@@ -10,7 +10,7 @@ import pdm.backend.config
 import pdm.backend.hooks
 import pytest
 
-from hatch_fancy_pypi_readme.pdm import FancyReadmeHook
+from pdm_fancy_pypi_readme.pdm import FancyReadmeHook
 
 
 README_CONFIG = {

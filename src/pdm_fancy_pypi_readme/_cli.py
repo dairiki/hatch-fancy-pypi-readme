@@ -10,10 +10,11 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import Any, NoReturn, TextIO
 
-from hatch_fancy_pypi_readme.exceptions import ConfigurationError
-
-from ._builder import build_text
-from ._config import load_and_validate_config
+from fancy_pypi_readme import (
+    ConfigurationError,
+    build_text,
+    load_and_validate_config,
+)
 
 
 class Backend(Enum):

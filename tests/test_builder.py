@@ -1,9 +1,11 @@
 # SPDX-FileCopyrightText: 2022 Hynek Schlawack <hs@ox.cx>
 #
 # SPDX-License-Identifier: MIT
+import re
 
 from hatch_fancy_pypi_readme._builder import build_text
 from hatch_fancy_pypi_readme._fragments import TextFragment
+from hatch_fancy_pypi_readme._substitutions import Substituter
 
 
 class TestBuildText:
@@ -26,4 +28,17 @@ class TestBuildText:
                 TextFragment("This is the README!"),
             ],
             [],
+        )
+
+    def test_substitution(self):
+        """
+        A substitution is run on a text fragment.
+        """
+        assert "This was the README!" == build_text(
+            [
+                TextFragment("This is the README!"),
+            ],
+            [
+                Substituter(pattern=re.compile(r"\bis\b"), replacement="was"),
+            ],
         )

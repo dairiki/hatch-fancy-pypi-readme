@@ -26,10 +26,15 @@ classifiers = [
   "Programming Language :: Python :: 3.12",
 ]
 dependencies = [
+  "fancy-pypi-readme @ git+https://github.com/dairiki/hatch-fancy-pypi-readme.git@refactor.split-base",
   "hatchling",
   "tomli; python_version<'3.11'",
   "typing-extensions; python_version<'3.8'",
 ]
+
+[tool.hatch.metadata]
+# FIXME: remove this
+allow-direct-references = true
 
 [project.entry-points.hatch]
 fancy-pypi-readme = "hatch_fancy_pypi_readme.hooks"

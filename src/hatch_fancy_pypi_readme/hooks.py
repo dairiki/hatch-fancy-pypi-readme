@@ -6,11 +6,10 @@ from __future__ import annotations
 
 from typing import Any
 
+from fancy_pypi_readme._builder import build_text
+from fancy_pypi_readme._config import load_and_validate_config
 from hatchling.metadata.plugin.interface import MetadataHookInterface
 from hatchling.plugin import hookimpl
-
-from ._builder import build_text
-from ._config import load_and_validate_config
 
 
 class FancyReadmeMetadataHook(MetadataHookInterface):

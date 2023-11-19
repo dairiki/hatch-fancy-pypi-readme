@@ -27,7 +27,6 @@ classifiers = [
 ]
 dependencies = [
   "fancy-pypi-readme @ git+https://github.com/dairiki/hatch-fancy-pypi-readme.git@refactor.split-base",
-  "hatchling",
   "tomli; python_version<'3.11'",
   "typing-extensions; python_version<'3.8'",
 ]
@@ -44,7 +43,7 @@ hatch-fancy-pypi-readme = "hatch_fancy_pypi_readme.__main__:main"
 
 [project.optional-dependencies]
 tests = ["pytest", "build", "wheel"]
-dev = ["hatch-fancy-pypi-readme[tests]", "mypy"]
+dev = ["hatch-fancy-pypi-readme[tests]", "mypy", "hatchling"]
 
 [project.urls]
 Documentation = "https://github.com/hynek/hatch-fancy-pypi-readme#readme"

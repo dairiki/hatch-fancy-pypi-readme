@@ -11,7 +11,7 @@ from contextlib import closing
 from pathlib import Path
 from typing import TextIO
 
-from ._cli import Backend, cli_run
+from ._cli import cli_run
 
 
 if sys.version_info < (3, 11):
@@ -22,8 +22,7 @@ else:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Render a README from a pyproject.toml & hatch.toml."
-        " If a hatch.toml is passed / detected, it's preferred."
+        description="Render a README from a pyproject.toml."
     )
     parser.add_argument(
         "pyproject_path",
@@ -34,48 +33,19 @@ def main() -> None:
         "Default: pyproject.toml in current directory.",
     )
     parser.add_argument(
-        "--hatch-toml",
-        nargs="?",
-        metavar="PATH-TO-HATCH.TOML",
-        default=None,
-        help="Path to an additional hatch.toml to use for rendering. "
-        "Default: Auto-detect in the current directory.",
-    )
-    parser.add_argument(
         "-o",
         help="Target file for output. Default: standard out.",
         metavar="TARGET-FILE-PATH",
     )
-    parser.add_argument(
-        "--backend",
-        choices=[enum.value for enum in Backend],
-        default=Backend.AUTO.value,
-        help="Build backend in use. Default: auto-detect from pyproject.toml.",
-    )
     args = parser.parse_args()
 
     pyproject = tomllib.loads(Path(args.pyproject_path).read_text())
-    hatch_toml = _maybe_load_hatch_toml(args.hatch_toml)
-    backend = Backend(args.backend)
 
     out: TextIO
     out = Path(args.o).open("w") if args.o else sys.stdout  # noqa: SIM115
 
     with closing(out):
-        cli_run(pyproject, hatch_toml, out, backend)
-
-
-def _maybe_load_hatch_toml(hatch_toml_arg: str | None) -> dict[str, object]:
-    """
-    If hatch.toml is passed or detected, load it.
-    """
-    if hatch_toml_arg:
-        return tomllib.loads(Path(hatch_toml_arg).read_text())
-
-    if Path("hatch.toml").exists():
-        return tomllib.loads(Path("hatch.toml").read_text())
-
-    return {}
+        cli_run(pyproject, out)
 
 
 if __name__ == "__main__":

@@ -3,9 +3,9 @@
 # SPDX-License-Identifier: MIT
 import re
 
-from hatch_fancy_pypi_readme._builder import build_text
-from hatch_fancy_pypi_readme._fragments import TextFragment
-from hatch_fancy_pypi_readme._substitutions import Substituter
+from fancy_pypi_readme._builder import build_text
+from fancy_pypi_readme._fragments import TextFragment
+from fancy_pypi_readme._substitutions import Substituter
 
 
 class TestBuildText:

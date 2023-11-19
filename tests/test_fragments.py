@@ -10,8 +10,8 @@ from pathlib import Path
 
 import pytest
 
-from hatch_fancy_pypi_readme._fragments import FileFragment, TextFragment
-from hatch_fancy_pypi_readme.exceptions import ConfigurationError
+from fancy_pypi_readme._fragments import FileFragment, TextFragment
+from fancy_pypi_readme.exceptions import ConfigurationError
 
 
 class TestTextFragment:

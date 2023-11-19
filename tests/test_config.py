@@ -4,8 +4,8 @@
 
 import pytest
 
-from hatch_fancy_pypi_readme._config import load_and_validate_config
-from hatch_fancy_pypi_readme.exceptions import ConfigurationError
+from fancy_pypi_readme._config import load_and_validate_config
+from fancy_pypi_readme.exceptions import ConfigurationError
 
 
 class TestValidateConfig:

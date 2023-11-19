@@ -9,7 +9,7 @@ import re
 from dataclasses import dataclass
 from typing import cast
 
-from hatch_fancy_pypi_readme.exceptions import ConfigurationError
+from .exceptions import ConfigurationError
 
 
 @dataclass

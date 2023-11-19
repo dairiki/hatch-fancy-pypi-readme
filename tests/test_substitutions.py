@@ -6,7 +6,7 @@ from __future__ import annotations
 
 import pytest
 
-from hatch_fancy_pypi_readme._substitutions import Substituter
+from fancy_pypi_readme._substitutions import Substituter
 
 
 VALID = {"pattern": "f(o)o", "replacement": r"bar\g<1>bar"}
